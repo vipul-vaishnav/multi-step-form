@@ -8,17 +8,18 @@ import ThankYou from '../views/ThankYou'
 
 const View: FC<IView> = (props): ReactElement => {
     const [on, setOn] = useState<boolean>(false)
+    const { activeStep, formData, setFormData } = props
 
     const ViewComponent = () => {
-        switch (props.activeStep) {
+        switch (activeStep) {
             case 1:
-                return <YourInfo />
+                return <YourInfo formData={formData} setFormData={setFormData} />
             case 2:
                 return <SelectPlan on={on} setOn={setOn} />
             case 3:
                 return <AddOns on={on} />
             case 4:
-                return <Summary />
+                return <Summary on={on} />
             default:
                 return <ThankYou />
         }

@@ -7,7 +7,7 @@ import Header from './Header';
 import { HeaderData } from '../data/HeaderData'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
-    const { activeStep, setActiveStep } = props
+    const { activeStep, setActiveStep, formData, setFormData } = props
 
     const headerData = HeaderData.find(el => el.viewNumber === activeStep)
 
@@ -19,6 +19,10 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
     }
 
     const handleNextClick = () => {
+        if (activeStep === 1) {
+            console.log(formData)
+        }
+
         setActiveStep((prev) => {
             if (prev === 4) return prev
             else return prev + 1
@@ -35,7 +39,7 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
         <section className="max-w-3xl w-full mx-auto">
             {activeStep !== 100 && <Header title={headerData?.title || "Lorem ipsum dolor"} description={headerData?.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit."} />}
 
-            <View activeStep={activeStep} />
+            <View activeStep={activeStep} formData={formData} setFormData={setFormData} />
 
             {activeStep !== 100 && <div className={"mt-12 w-full flex items-center" + ` ${activeStep !== 1 ? "justify-between" : "justify-end"}`}>
                 {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
