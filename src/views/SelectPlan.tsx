@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { FC, ReactElement, useState } from 'react'
 import { CardData } from './../data/CardData';
 import Card from '../components/Card';
 import Switch from '../components/Switch';
+import { ISelectPlan } from './interfaces/ISelectPlan';
 
-const SelectPlan = () => {
-    const [on, setOn] = useState<boolean>(false)
-
+const SelectPlan: FC<ISelectPlan> = (props): ReactElement => {
+    const { on, setOn } = props
 
     return (
         <div className="w-full my-16">
