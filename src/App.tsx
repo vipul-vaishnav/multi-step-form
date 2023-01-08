@@ -13,7 +13,7 @@ const App = () => {
           <Sidebar sidebarCollapsed={sidebarCollapsed} setSidebarCollapsed={setSidebarCollapsed} activeStep={activeStep} setActiveStep={setActiveStep} />
         </aside>
         <article className="flex-1 p-6 overflow-auto">
-          <Dashboard activeStep={activeStep} />
+          <Dashboard activeStep={activeStep} setActiveStep={setActiveStep} />
         </article>
       </main>
     </div >
