@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
+import { Toaster } from "react-hot-toast"
 
 const App = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false)
@@ -16,6 +17,7 @@ const App = () => {
           <Dashboard activeStep={activeStep} setActiveStep={setActiveStep} />
         </article>
       </main>
+      <Toaster />
     </div >
   )
 }

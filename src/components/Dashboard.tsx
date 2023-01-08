@@ -1,6 +1,8 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react'
 import { IDashboard } from './interfaces/IDashboard'
 import Button from './Button'
+import View from './View'
+import { toast } from 'react-hot-toast'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
     const { activeStep, setActiveStep } = props
@@ -20,22 +22,19 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
     }
 
     const handleSubmit = () => {
-        console.log("FORM submission successfully")
+        setActiveStep(100)
+        toast.success("Subscription successful!", { className: "bg-primary text-white" })
     }
 
     return (
         <div>
-            <div>
-                <p className="text-2xl">
-                    {activeStep}
-                </p>
-            </div>
+            <View activeStep={activeStep} />
 
-            <div className="my-12">
+            {activeStep !== 100 && <div className="my-12">
                 {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
-                {activeStep !== 4 && <Button onClick={handleNextClick} label='Next Step' variant='contained' />}
+                {activeStep !== 4 && < Button onClick={handleNextClick} label='Next Step' variant='contained' />}
                 {activeStep === 4 && <Button onClick={handleSubmit} label='Confirm' variant='contained' />}
-            </div>
+            </div>}
         </div>
     )
 }
