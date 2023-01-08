@@ -8,9 +8,11 @@ const AddOns: FC<IAddOns> = (props): ReactElement => {
 
     return (
         <div className="w-full my-12">
-            {TileData.map((item, idx) => {
-                return <Tile key={idx} title={item.title} description={item.description} price={on ? item.price.yearly : item.price.monthly} on={on} />
-            })}
+            <section>
+                {TileData.map((item, idx) => {
+                    return <Tile key={idx} title={item.title} description={item.description} price={on ? item.price.yearly : item.price.monthly} on={on} />
+                })}
+            </section>
         </div>
     )
 }
