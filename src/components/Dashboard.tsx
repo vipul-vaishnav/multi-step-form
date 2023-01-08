@@ -19,7 +19,9 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
         })
     }
 
-    useEffect(() => { }, [])
+    const handleSubmit = () => {
+        console.log("FORM submission successfully")
+    }
 
     return (
         <div>
@@ -32,6 +34,7 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
             <div className="my-12">
                 {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
                 {activeStep !== 4 && <Button onClick={handleNextClick} label='Next Step' variant='contained' />}
+                {activeStep === 4 && <Button onClick={handleSubmit} label='Confirm' variant='contained' />}
             </div>
         </div>
     )

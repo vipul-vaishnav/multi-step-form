@@ -6,4 +6,5 @@ export interface IStep {
     activeStep: number
     setActiveStep: Dispatch<SetStateAction<number>>
     stepComplete: boolean
+    sidebarCollapsed: boolean
 }
