@@ -34,13 +34,15 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
         <div>
             {activeStep !== 100 && <Header title={headerData?.title || "Lorem ipsum dolor"} description={headerData?.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit."} />}
 
-            <View activeStep={activeStep} />
+            <section className="max-w-3xl mx-auto">
+                <View activeStep={activeStep} />
 
-            {activeStep !== 100 && <div className="my-12">
-                {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
-                {activeStep !== 4 && < Button onClick={handleNextClick} label='Next Step' variant='contained' />}
-                {activeStep === 4 && <Button onClick={handleSubmit} label='Confirm' variant='contained' />}
-            </div>}
+                {activeStep !== 100 && <div className={"mt-12 w-full flex items-center justify-" + `${activeStep !== 1 ? "between" : "end"}`}>
+                    {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
+                    {activeStep !== 4 && < Button onClick={handleNextClick} label='Next Step' variant='contained' />}
+                    {activeStep === 4 && <Button onClick={handleSubmit} label='Confirm' variant='contained' />}
+                </div>}
+            </section>
         </div>
     )
 }

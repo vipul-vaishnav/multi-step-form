@@ -6,8 +6,8 @@ const Header: FC<IHeader> = (props): ReactElement => {
 
     return (
         <header>
-            <h1>{title}</h1>
-            <p>{description}</p>
+            <h1 className="text-4xl font-extrabold mb-5">{title}</h1>
+            <p className="text-[#999]">{description}</p>
         </header>
     )
 }
