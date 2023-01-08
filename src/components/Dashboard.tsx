@@ -3,9 +3,13 @@ import { IDashboard } from './interfaces/IDashboard'
 import Button from './Button'
 import View from './View'
 import { toast } from 'react-hot-toast'
+import Header from './Header';
+import { HeaderData } from '../data/HeaderData'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
     const { activeStep, setActiveStep } = props
+
+    const headerData = HeaderData.find(el => el.viewNumber === activeStep)
 
     const handleBackClick = () => {
         setActiveStep((prev) => {
@@ -28,6 +32,8 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
 
     return (
         <div>
+            {activeStep !== 100 && <Header title={headerData?.title || "Lorem ipsum dolor"} description={headerData?.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit."} />}
+
             <View activeStep={activeStep} />
 
             {activeStep !== 100 && <div className="my-12">
