@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from 'react'
 
 export interface IDashboard {
-    activeStep: number
-    setActiveStep: Dispatch<SetStateAction<number>>
+  activeStep: number
+  setActiveStep: Dispatch<SetStateAction<number>>
 }

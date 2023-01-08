@@ -1,4 +1,4 @@
 export type StepType = {
-    stepNumber: number,
-    stepTitle: string,
+  stepNumber: number
+  stepTitle: string
 }

@@ -1,3 +1,3 @@
 export interface IView {
-    activeStep: number;
+  activeStep: number
 }

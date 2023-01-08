@@ -1,5 +1,5 @@
 export type HeaderType = {
-    title: string
-    description: string
-    viewNumber: number
+  title: string
+  description: string
+  viewNumber: number
 }
