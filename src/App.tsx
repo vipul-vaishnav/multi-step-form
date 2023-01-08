@@ -9,9 +9,9 @@ const App = () => {
   const [activeStep, setActiveStep] = useState<number>(1)
 
   const [formData, setFormData] = useState<SubscriptionFormData>({
-    name: "Vipul",
-    email: "vipul@email.com",
-    phone: "+91 1234567890",
+    name: "",
+    email: "",
+    phone: "",
     plan: undefined,
     addOns: undefined
   })
