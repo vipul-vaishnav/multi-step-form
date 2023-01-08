@@ -37,7 +37,7 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
 
             <View activeStep={activeStep} />
 
-            {activeStep !== 100 && <div className={"mt-12 w-full flex items-center justify-" + `${activeStep !== 1 ? "between" : "end"}`}>
+            {activeStep !== 100 && <div className={"mt-12 w-full flex items-center" + ` ${activeStep !== 1 ? "justify-between" : "justify-end"}`}>
                 {activeStep !== 1 && <Button onClick={handleBackClick} label='Go Back' variant='text' />}
                 {activeStep !== 4 && < Button onClick={handleNextClick} label='Next Step' variant='contained' />}
                 {activeStep === 4 && <Button onClick={handleSubmit} label='Confirm' variant='contained' />}
