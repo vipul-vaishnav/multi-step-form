@@ -8,7 +8,7 @@ import { HeaderData } from '../data/HeaderData'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
     const { activeStep, setActiveStep, formData, setFormData } = props
-    const { name, email, phone } = formData
+    const { name, email, phone, plan } = formData
 
     const validateEmail = () => {
         return String(email)
@@ -42,13 +42,21 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
                 } else {
                     toast.success("Information saved successfully", { className: "bg-primary text-white" })
                 }
+                break;
             case 2:
+                if (!plan) {
+                    toast.error("Please select a plan", { className: "bg-[#c92a2a] text-white" })
+                    return
+                }
+                break;
         }
 
         setActiveStep((prev) => {
             if (prev === 4) return prev
             else return prev + 1
         })
+
+        console.log(formData)
     }
 
     const handleSubmit = () => {

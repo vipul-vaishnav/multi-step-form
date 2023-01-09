@@ -5,13 +5,13 @@ import Switch from '../components/Switch';
 import { ISelectPlan } from './interfaces/ISelectPlan';
 
 const SelectPlan: FC<ISelectPlan> = (props): ReactElement => {
-    const { on, setOn } = props
+    const { on, setOn, setFormData, formData } = props
 
     return (
         <div className="w-full my-16">
             <section className="flex items-center justify-between gap-4">
                 {CardData.map((item, idx) => {
-                    return <Card key={idx} icon={item.icon} price={on ? item.price.yearly : item.price.monthly} title={item.title} on={on} />
+                    return <Card key={idx} icon={item.icon} price={item.price} title={item.title} on={on} setFormData={setFormData} formData={formData} />
                 })}
             </section>
 

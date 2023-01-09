@@ -1,16 +1,11 @@
-export type Price = {
-  monthly: number
-  yearly: number
-}
-
 export type Plan = {
   title: string
-  price: Price
+  price: number
 }
 
 export type AddOn = {
   title: string
-  price: Price
+  price: number
 }
 
 export type SubscriptionFormData = {
