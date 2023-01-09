@@ -42,6 +42,8 @@ const Card: FC<ICard> = (props): ReactElement => {
                     return { ...prev, plan: newPlan }
                 })
             }
+        } else {
+            return
         }
     }, [on])
 

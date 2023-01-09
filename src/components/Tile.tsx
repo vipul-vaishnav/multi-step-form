@@ -1,6 +1,7 @@
 import React, { FC, ReactElement, useEffect } from 'react'
 import { ITile } from './interfaces/ITile'
 import { toast } from 'react-hot-toast'
+import { AddOn } from '../types/SubscriptionFormData'
 
 const Tile: FC<ITile> = (props): ReactElement => {
     const { title, price, description, on, formData, setFormData } = props
@@ -25,7 +26,32 @@ const Tile: FC<ITile> = (props): ReactElement => {
         }
     }
 
-    useEffect(() => { }, [on])
+    useEffect(() => {
+        if (formData.addOns.length === 0) {
+            return
+        } else {
+            const addOnArray = formData.addOns.map((addOn) => {
+                if (addOn.title === title) {
+                    return { title: addOn.title, price: on ? price.yearly : price.monthly }
+                }
+            })
+
+            const addOn = addOnArray.filter(item => item)
+
+            setFormData(prev => {
+                const updatedAddOnArr = formData.addOns.map(item => {
+                    if (item.title === addOn[0]?.title) {
+                        item.price = addOn[0].price
+                        return item
+                    } else {
+                        return item
+                    }
+                })
+
+                return { ...prev, addOns: updatedAddOnArr }
+            })
+        }
+    }, [on])
 
     return (
         <button onClick={handleTileClick} className={`w-full border ${isAddOnSelected ? "border-primary bg-primary bg-opacity-10" : "border-[#333]"} my-4 rounded-lg p-6 cursor-pointer hover:border-primary flex items-center justify-between text-left`}>
