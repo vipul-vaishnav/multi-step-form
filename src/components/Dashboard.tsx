@@ -7,7 +7,7 @@ import Header from './Header';
 import { HeaderData } from '../data/HeaderData'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
-    const { activeStep, setActiveStep, formData, setFormData } = props
+    const { activeStep, setActiveStep, formData, setFormData, setStepStatus } = props
     const { name, email, phone, plan, addOns } = formData
 
     const validateEmail = () => {
@@ -41,27 +41,51 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
                     return
                 } else {
                     toast.success("Information saved successfully", { className: "bg-primary text-white" })
+                    setStepStatus(prev => {
+                        const currStepIdx = prev.findIndex(step => step.stepNumber === activeStep)
+
+                        const updatedStep = { stepNumber: activeStep, isCompleted: true }
+
+                        prev[currStepIdx] = updatedStep
+
+                        return prev
+                    })
                 }
                 break;
             case 2:
                 if (!plan) {
                     toast.error("Please select a plan", { className: "bg-[#c92a2a] text-white" })
                     return
+                } else {
+                    setStepStatus(prev => {
+                        const currStepIdx = prev.findIndex(step => step.stepNumber === activeStep)
+
+                        const updatedStep = { stepNumber: activeStep, isCompleted: true }
+
+                        prev[currStepIdx] = updatedStep
+
+                        return prev
+                    })
                 }
                 break;
             case 3:
-                if (addOns && addOns.length !== 0) {
-                    let str = ""
-
-                    addOns.forEach(item => {
-                        str += item.title
-                        str += ", "
-                    })
-
-                    toast.success(str.slice(0, -2) + " selected", { className: "bg-primary text-white" })
+                if (!addOns || addOns.length === 0) {
+                    toast.success("You have not selected any add-ons", { className: "bg-indigo-600 text-white", icon: "⚙️" })
                 }
+
+                setStepStatus(prev => {
+                    const currStepIdx = prev.findIndex(step => step.stepNumber === activeStep)
+
+                    const updatedStep = { stepNumber: activeStep, isCompleted: true }
+
+                    prev[currStepIdx] = updatedStep
+
+                    return prev
+                })
+                break;
             case 4:
                 console.log(formData)
+
         }
 
         setActiveStep((prev) => {
@@ -73,6 +97,16 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
     const handleSubmit = () => {
         setActiveStep(100)
         toast.success("Subscription successful!", { className: "bg-primary text-white" })
+
+        setStepStatus(prev => {
+            const currStepIdx = prev.findIndex(step => step.stepNumber === activeStep)
+
+            const updatedStep = { stepNumber: activeStep, isCompleted: true }
+
+            prev[currStepIdx] = updatedStep
+
+            return prev
+        })
     }
 
     return (

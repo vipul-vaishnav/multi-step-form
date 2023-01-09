@@ -5,10 +5,27 @@ import Step from './Step';
 import { StepType } from '../types/StepType';
 
 const Sidebar: FC<ISidebar> = (props): ReactElement => {
-    const { sidebarCollapsed, setSidebarCollapsed, activeStep, setActiveStep } = props
+    const { sidebarCollapsed, setSidebarCollapsed, activeStep, setActiveStep, stepStatus } = props
 
     const handleSidebarCollapseState = () => {
         setSidebarCollapsed(prev => !prev)
+    }
+
+    const isStepCompleted = (stepNumber: number) => {
+        const findStep = stepStatus.find(step => step.stepNumber === stepNumber)!
+
+        return findStep?.isCompleted
+    }
+
+    const isPreviousStepCompleted = (stepNumber: number) => {
+        if (stepNumber === 1) return
+        else {
+            const prevStepNumber = stepNumber - 1
+
+            const step = stepStatus.find(step => step.stepNumber === prevStepNumber)
+
+            return step?.isCompleted
+        }
     }
 
     return (
@@ -34,10 +51,9 @@ const Sidebar: FC<ISidebar> = (props): ReactElement => {
                     </button>
                 </div>
 
-
                 <div className="mt-6 flex flex-col gap-6">
                     {StepData.map((el: StepType, idx) => {
-                        return <Step key={idx} stepTitle={el.stepTitle} stepNumber={el.stepNumber} activeStep={activeStep} setActiveStep={setActiveStep} stepComplete={false} sidebarCollapsed={sidebarCollapsed} />
+                        return <Step key={idx} stepTitle={el.stepTitle} stepNumber={el.stepNumber} activeStep={activeStep} setActiveStep={setActiveStep} sidebarCollapsed={sidebarCollapsed} completed={isStepCompleted(el.stepNumber)} isPreviousStepCompleted={isPreviousStepCompleted(el.stepNumber)} />
                     })}
                 </div>
             </section >

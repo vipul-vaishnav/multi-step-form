@@ -2,16 +2,16 @@ import React, { FC, ReactElement } from 'react'
 import { IStep } from './interfaces/IStep'
 
 const Step: FC<IStep> = (props): ReactElement => {
-    const { stepTitle, stepNumber, activeStep, setActiveStep, stepComplete, sidebarCollapsed } = props
+    const { stepTitle, stepNumber, activeStep, setActiveStep, sidebarCollapsed, completed, isPreviousStepCompleted } = props
 
     const handleClick = (arg: IStep["stepNumber"]) => setActiveStep(arg)
 
     return (
         <div className={`${sidebarCollapsed ? "relative" : ""}`}>
-            <button onClick={() => handleClick(stepNumber)} className="w-full flex items-center justify-start gap-4">
+            <button onClick={() => handleClick(stepNumber)} className="w-full flex items-center justify-start gap-4" disabled={isPreviousStepCompleted === undefined ? false : !isPreviousStepCompleted}>
                 <section>
-                    <div className={`w-7 h-7 rounded-full border grid place-content-center text-sm p-3 ${stepComplete ? "border-primary text-primary" : "border-[#333] text-[#333]"}`}>
-                        {sidebarCollapsed ? <p className={`${stepComplete ? "border-primary text-primary" : "border-[#333] text-[#333]"}`}>{stepNumber}</p> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                    <div className={`w-7 h-7 rounded-full border grid place-content-center text-sm p-3 ${completed ? "border-primary text-primary" : "border-[#333] text-[#333]"}`}>
+                        {sidebarCollapsed ? <p className={`${completed ? "border-primary text-primary" : "border-[#333] text-[#333]"}`}>{stepNumber}</p> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>}
                     </div>
