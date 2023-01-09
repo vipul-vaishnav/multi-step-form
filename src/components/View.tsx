@@ -17,7 +17,7 @@ const View: FC<IView> = (props): ReactElement => {
             case 2:
                 return <SelectPlan on={on} setOn={setOn} formData={formData} setFormData={setFormData} />
             case 3:
-                return <AddOns on={on} />
+                return <AddOns on={on} formData={formData} setFormData={setFormData} />
             case 4:
                 return <Summary on={on} />
             default:

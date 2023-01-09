@@ -13,7 +13,7 @@ const App = () => {
     email: "",
     phone: "",
     plan: undefined,
-    addOns: undefined
+    addOns: []
   })
 
   return (

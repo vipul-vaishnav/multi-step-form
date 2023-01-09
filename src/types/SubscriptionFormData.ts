@@ -13,5 +13,5 @@ export type SubscriptionFormData = {
   email: string
   phone: string
   plan?: Plan
-  addOns?: AddOn[]
+  addOns: AddOn[]
 }
