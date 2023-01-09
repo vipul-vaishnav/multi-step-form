@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { ICard } from './interfaces/ICard'
 import Arcade from './icons/Arcade'
 import Advance from './icons/Advance'
@@ -32,20 +32,6 @@ const Card: FC<ICard> = (props): ReactElement => {
 
         toast.success("You have selected " + title, { className: "bg-primary text-white" })
     }
-
-    useEffect(() => {
-        if (formData.plan) {
-            if (title === formData.plan?.title) {
-                const newPlan = { title: formData.plan?.title, price: on ? price.yearly : price.monthly }
-
-                setFormData(prev => {
-                    return { ...prev, plan: newPlan }
-                })
-            }
-        } else {
-            return
-        }
-    }, [on])
 
     return (
         <button onClick={handleCardClick} className={`w-full border rounded-lg p-5 cursor-pointer hover:border-primary text-left ${selected ? "border-primary bg-primary bg-opacity-10" : "border-[#333]"}`}>

@@ -6,6 +6,7 @@ import AddOns from '../views/AddOns'
 import Summary from '../views/Summary'
 import ThankYou from '../views/ThankYou'
 import { TileData } from '../data/TileData'
+import { CardData } from '../data/CardData'
 
 const View: FC<IView> = (props): ReactElement => {
     const [on, setOn] = useState<boolean>(false)
@@ -20,11 +21,24 @@ const View: FC<IView> = (props): ReactElement => {
             case 3:
                 return <AddOns on={on} formData={formData} setFormData={setFormData} />
             case 4:
-                return <Summary on={on} formData={formData} />
+                return <Summary on={on} setOn={setOn} formData={formData} />
             default:
                 return <ThankYou />
         }
     }
+
+    useEffect(() => {
+        if (formData.plan) {
+            const plan = CardData.find(plan => plan.title === formData.plan?.title)!
+            const newPlan = { title: formData.plan.title, price: on ? plan?.price.yearly : plan?.price.monthly }
+
+            setFormData(prev => {
+                return { ...prev, plan: newPlan }
+            })
+        } else {
+            return
+        }
+    }, [on])
 
     useEffect(() => {
         const newData = formData.addOns.map(item => {

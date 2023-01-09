@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react'
 import { ISummary } from './interfaces/ISummary'
 
 const Summary: FC<ISummary> = (props): ReactElement => {
-    const { on, formData } = props
+    const { on, formData, setOn } = props
 
     const { name, plan, addOns } = formData
 
@@ -26,7 +26,7 @@ const Summary: FC<ISummary> = (props): ReactElement => {
                     <section>
                         <h2 className="font-bold text-lg text-primary">{plan?.title} ({on ? "Yearly" : "Monthly"})</h2>
                         <div>
-                            <button className="underline text-[#999] hover:text-primary hover:opacity-50">change</button>
+                            <button onClick={() => setOn(prev => !prev)} className="underline text-[#999] hover:text-primary hover:opacity-50">change</button>
                         </div>
                     </section>
                     <section>
