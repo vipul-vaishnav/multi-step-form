@@ -8,7 +8,7 @@ import { HeaderData } from '../data/HeaderData'
 
 const Dashboard: FC<IDashboard> = (props): ReactElement => {
     const { activeStep, setActiveStep, formData, setFormData } = props
-    const { name, email, phone, plan } = formData
+    const { name, email, phone, plan, addOns } = formData
 
     const validateEmail = () => {
         return String(email)
@@ -49,14 +49,25 @@ const Dashboard: FC<IDashboard> = (props): ReactElement => {
                     return
                 }
                 break;
+            case 3:
+                if (addOns && addOns.length !== 0) {
+                    let str = ""
+
+                    addOns.forEach(item => {
+                        str += item.title
+                        str += ", "
+                    })
+
+                    toast.success(str.slice(0, -2) + " selected", { className: "bg-primary text-white" })
+                }
+            case 4:
+                console.log(formData)
         }
 
         setActiveStep((prev) => {
             if (prev === 4) return prev
             else return prev + 1
         })
-
-        console.log(formData)
     }
 
     const handleSubmit = () => {

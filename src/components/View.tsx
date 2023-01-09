@@ -1,10 +1,11 @@
-import React, { FC, ReactElement, useState } from 'react'
+import React, { FC, ReactElement, useEffect, useState } from 'react'
 import { IView } from './interfaces/IView'
 import YourInfo from '../views/YourInfo'
 import SelectPlan from '../views/SelectPlan'
 import AddOns from '../views/AddOns'
 import Summary from '../views/Summary'
 import ThankYou from '../views/ThankYou'
+import { TileData } from '../data/TileData'
 
 const View: FC<IView> = (props): ReactElement => {
     const [on, setOn] = useState<boolean>(false)
@@ -19,11 +20,22 @@ const View: FC<IView> = (props): ReactElement => {
             case 3:
                 return <AddOns on={on} formData={formData} setFormData={setFormData} />
             case 4:
-                return <Summary on={on} />
+                return <Summary on={on} formData={formData} />
             default:
                 return <ThankYou />
         }
     }
+
+    useEffect(() => {
+        const newData = formData.addOns.map(item => {
+            const addOn = TileData.find(x => x.title === item.title)!
+            return { title: item.title, price: on ? addOn?.price.yearly : addOn?.price.monthly }
+        })
+
+        setFormData(prev => {
+            return { ...prev, addOns: newData }
+        })
+    }, [on])
 
 
     return (

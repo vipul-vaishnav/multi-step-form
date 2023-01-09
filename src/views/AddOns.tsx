@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useEffect } from 'react'
 import Tile from '../components/Tile'
 import { TileData } from '../data/TileData'
 import { IAddOns } from './interfaces/IAddOns'
